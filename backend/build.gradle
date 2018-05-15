@@ -41,14 +41,12 @@ node {
 }
 
 task npmRunBuild(type: NpmTask, dependsOn: npmInstall) {
-
     args = ['run', 'build']
 }
 
 task copyFrontend(type: Copy, dependsOn: npmRunBuild) {
-    println("copyFrontend")
     from '../frontend/dist'
     into 'src/main/resources/public'
 }
 
-assemble.dependsOn clean, copyFrontend
+processResources.dependsOn copyFrontend
